@@ -1,6 +1,6 @@
 
 
-MOD=json
+MOD=test json
 
 export CXX = g++  -g --std=c++17 -Wall -Wpedantic -Wextra  -Wfatal-errors -Werror
 #CXX = clang++  -g --std=c++17 -Wall -Wpedantic -Wextra  -Wfatal-errors -Werror 
