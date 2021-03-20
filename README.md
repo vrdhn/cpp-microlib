@@ -39,3 +39,10 @@ TEST( some_name) {
 TEST_END;
 ```
 
+log
+---
+Simply log to stdout.
+```
+int j = 10;
+LOG.debug("value is ", j, " grams");
+```
