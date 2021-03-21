@@ -8,10 +8,10 @@ class Test {};
 
 class TestSuite {
 
-#define RST "\x1B[0m"
-#define KRED "\x1B[31m"
-#define KGRN "\x1B[32m"
-#define KBLU "\x1B[34m"
+#define TEST_RST "\x1B[0m"
+#define TEST_KRED "\x1B[31m"
+#define TEST_KGRN "\x1B[32m"
+#define TEST_KBLU "\x1B[34m"
 
       private:
 	typedef bool (*func_t)(std::ostream &log);
@@ -24,14 +24,14 @@ class TestSuite {
 	static void tell(std::string name, bool pass, std::stringstream &log) {
 		if (pass) {
 			success++;
-			std::cout << KGRN << ".. PASS " << name << RST
+			std::cout << TEST_KGRN << ".. PASS " << name << TEST_RST
 				  << std::endl;
 		} else {
-			std::cout << KRED << "** FAIL " << name << KBLU
-				  << std::endl
+			std::cout << TEST_KRED << "** FAIL " << name
+				  << TEST_KBLU << std::endl
 				  << "--" << std::endl
 				  << log.str() << std::endl
-				  << "--" << RST << std::endl;
+				  << "--" << TEST_RST << std::endl;
 			failure++;
 		}
 	}
@@ -51,15 +51,15 @@ class TestSuite {
 
 	static int report() {
 		if (success + failure == 0) {
-			std::cout << KRED
+			std::cout << TEST_KRED
 				  << "** Test case malfunction, no tests found"
-				  << RST << std::endl;
+				  << TEST_RST << std::endl;
 			return 1;
 		}
 
-		std::cout << (failure ? KRED : KGRN) << "Total "
+		std::cout << (failure ? TEST_KRED : TEST_KGRN) << "Total "
 			  << success + failure << ",  PASS: " << success
-			  << ", FAIL: " << failure << RST << std::endl;
+			  << ", FAIL: " << failure << TEST_RST << std::endl;
 		return failure;
 	}
 };

@@ -2,6 +2,9 @@
 HEADER = log.hpp
 TESTER = log.cpp
 
+export CXX = g++  -g --std=c++17 -Wall -Wpedantic -Wextra  -Wfatal-errors -Werror
+#CXX = clang++  -g --std=c++17 -Wall -Wpedantic -Wextra  -Wfatal-errors -Werror 
+export FMT = @clang-format -i  --style="{BasedOnStyle: llvm, IndentWidth: 8, UseTab: Always}"
 
 
 .PHONY: _clean
