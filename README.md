@@ -46,3 +46,13 @@ Simply log to stdout.
 int j = 10;
 LOG.debug("value is ", j, " grams");
 ```
+
+args
+----
+Simple argument parser.
+```
+static char verbose[] = "verbose";
+static char rest[] = "";
+std::tuple<args::arg<verbose, bool>, args::arg<rest,std::vector<std::string>>> opts;
+bool ret = args::parse(argc, argv, opts);
+```
