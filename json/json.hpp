@@ -1,6 +1,7 @@
 
 #include <cassert>
 #include <cctype>
+#include <charconv>
 #include <iostream>
 #include <string>
 #include <tuple>
@@ -79,6 +80,8 @@ template <typename T> bool parse(const char *str, T &out) {
 	return _parse(s, out);
 }
 
+// stream() should provide a better api so that  std::from_chars can
+// be used
 bool _parse(stream &s, int &out) {
 	s.skip_ws();
 	out = 0;
@@ -94,6 +97,36 @@ bool _parse(stream &s, int &out) {
 	if (len == 0) {
 		return s.error("Expecting integer");
 	}
+	if (neg)
+		out = -out;
+	return true;
+}
+
+// stream() should provide a better api so that  std::from_chars can
+// be used
+bool _parse(stream &s, double &out) {
+	s.skip_ws();
+	out = 0;
+	int len = 0;
+	int ch;
+	bool neg = s.is_char('-');
+	if (neg)
+		s.skip_ws();
+	while (s.get_digit(ch)) {
+		out = out * 10 + ch - '0';
+		len++;
+	}
+	if (len == 0) {
+		return s.error("Expecting float");
+	}
+	double postdecimal = 10;
+	if (s.is_char('.')) {
+		while (s.get_digit(ch)) {
+			out += (ch - '0') / postdecimal;
+			postdecimal *= 10;
+		}
+	}
+
 	if (neg)
 		out = -out;
 	return true;

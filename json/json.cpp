@@ -1,6 +1,17 @@
 
 #include "json.hpp"
 
+bool floateq(double a, double b) {
+	if (a == b)
+		return true;
+
+	if (a == 0 && b != 0)
+		return false;
+
+	auto abs = [](double x) { return x < 0 ? -x : x; };
+	return abs((a - b) / a) < 0.01;
+}
+
 int main() {
 	{
 		int j;
@@ -15,6 +26,18 @@ int main() {
 		assert(j == -100);
 		json::parse(" - 100 ", j);
 		assert(j == -100);
+	}
+	{
+		double f;
+		bool ret = json::parse(" 10 ", f);
+		assert(ret);
+		assert(floateq(f, 10.0)); // TODO: delta comparision
+	}
+	{
+		double f;
+		bool ret = json::parse(" 10.010203 ", f);
+		assert(ret);
+		assert(floateq(f, 10.010203)); // TODO: delta comparision
 	}
 	{
 		std::string str;

@@ -22,10 +22,18 @@ class Log {
 	template <typename _FIRST, typename... _REST>
 	void info(const _FIRST &f, const _REST &...r) {
 		std::cout << f;
-		debug(r...);
+		info(r...);
 	}
 
 	void info() { std::cout << std::endl; }
+
+	template <typename _FIRST, typename... _REST>
+	void error(const _FIRST &f, const _REST &...r) {
+		std::cout << f;
+		error(r...);
+	}
+
+	void error() { std::cout << std::endl; }
 };
 
 extern Log LOG;
