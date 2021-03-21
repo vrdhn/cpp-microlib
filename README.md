@@ -56,3 +56,9 @@ static char rest[] = "";
 std::tuple<args::arg<verbose, bool>, args::arg<rest,std::vector<std::string>>> opts;
 bool ret = args::parse(argc, argv, opts);
 ```
+
+
+sim
+---
+Simple discreet event simulation engine.
+Uses virtual functions , templates are too clumsy for this.
